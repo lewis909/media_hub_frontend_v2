@@ -1,0 +1,8 @@
+{% extends 'website/header.html' %}
+{% block content %}
+
+    {% for i in object_list %}
+        <p>{{i.material_id}} | {{ i.series_title }} | {{ i.season_number }}</p>
+    {% endfor %}
+
+{% endblock %}

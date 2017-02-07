@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class AssetMetadata(models.Model):
 
@@ -14,6 +13,9 @@ class AssetMetadata(models.Model):
     synopsis = models.TextField(max_length=1024, default='null')
     ratings = models.CharField(max_length=256, default='null')
 
+    def __str__(self):
+        return self.id
+
 
 class Profiles(models.Model):
 
@@ -26,12 +28,18 @@ class Profiles(models.Model):
     image_naming_convention = models.CharField(max_length=256, default='null')
     package_naming_convention = models.CharField(max_length=256, default='null')
 
+    def __str__(self):
+        return self.id
+
 
 class ConformProfiles(models.Model):
 
     id = models.DecimalField.auto_creation_counter
     name = models.CharField(max_length=256, default='null')
     conform_profile = models.TextField(max_length=1024, default='null')
+
+    def __str__(self):
+        return self.id
 
 
 class Task(models.Model):
@@ -42,6 +50,9 @@ class Task(models.Model):
     job_start_time = models.CharField(max_length=256, default='null')
     job_end_time = models.CharField(max_length=256, default='null')
     user = models.CharField(max_length=256, default='null')
+
+    def __str__(self):
+        return self.id
 
 
 class FileRepo(models.Model):
@@ -58,3 +69,6 @@ class FileRepo(models.Model):
     seg_3_dur = models.CharField(max_length=12, default='null')
     seg_4_in = models.CharField(max_length=12, default='null')
     seg_4_dur = models.CharField(max_length=12, default='null')
+
+    def __str__(self):
+        return self.id
