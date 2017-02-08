@@ -1,22 +1,44 @@
 {% extends 'website/header.html' %}
 {% block content %}
-    <table class="table table-striped">
-        <tr>
-            <th>Task ID</th>
-            <th>Material ID</th>
-            <th>Workflow</th>
-            <th>Job Status</th>
-            <th>User</th>
-        </tr>
-        {%  for i in object_list %}
-            <tr>
-                <td>{{i.id|stringformat:"06d"}}</td>
-                <td>{{i.material_id}}</td>
-                <td>{{i.workflow}}</td>
-                <td>{{i.status}}</td>
-                <td>{{i.user}}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    <p><b>Submit Job</b></p>
+    <form  method="post">
+        <b>Select Asset to transcode</b>
+        <input type="hidden" name="login_user" value="<?php echo $login_user; ?>"/>
+        <p>Material ID:
+            <input type="text" name="material_id" size="30" value="" id="keyword"/>
+        <div id="results"></div>
+        </p>
+        <p>Profile:
+            <select name="workflow">
+                        <option value="">Select a transcode Profile</option>
+                        {%  for i in object_list %}
+                            <option value="{{ i.name }}">{{ i.name }}</option>
+                        {% endfor %}
+            </select>
+        </p>
+        <script>
+            $(function() {
+                $( "#start_datepicker" ).datepicker({
+
+                    dateFormat: 'dd-mm-yy'
+
+                });
+            });
+        </script>
+        <p>License Start Date: <input type="text" id="start_datepicker" name="start_date"></p>
+        <script>
+            $(function() {
+                $( "#end_datepicker" ).datepicker({
+
+                    dateFormat: 'dd-mm-yy'
+
+                });
+            });
+        </script>
+        <p>License End Date: <input type="text" id="end_datepicker" name="end_date"></p>
+        <p>
+            <input type="submit" name="submit" value="Send" />
+        </p>
+    </form>
 
 {% endblock %}
