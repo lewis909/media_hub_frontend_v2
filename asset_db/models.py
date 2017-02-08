@@ -14,7 +14,7 @@ class AssetMetadata(models.Model):
     ratings = models.CharField(max_length=256, default='null')
 
     def __str__(self):
-        return self.id
+        return self.material_id
 
 
 class Profiles(models.Model):
@@ -29,7 +29,7 @@ class Profiles(models.Model):
     package_naming_convention = models.CharField(max_length=256, default='null')
 
     def __str__(self):
-        return self.id
+        return self.name
 
 
 class ConformProfiles(models.Model):
@@ -39,11 +39,11 @@ class ConformProfiles(models.Model):
     conform_profile = models.TextField(max_length=1024, default='null')
 
     def __str__(self):
-        return self.id
+        return self.name
 
 
 class Task(models.Model):
-    task_id = models.DecimalField(6).auto_creation_counter
+
     material_id = models.CharField(max_length=256, default='null')
     status = models.CharField(max_length=256, default='null')
     workflow = models.CharField(max_length=256, default='null')
@@ -52,7 +52,7 @@ class Task(models.Model):
     user = models.CharField(max_length=256, default='null')
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 class FileRepo(models.Model):
@@ -71,4 +71,4 @@ class FileRepo(models.Model):
     seg_4_dur = models.CharField(max_length=12, default='null')
 
     def __str__(self):
-        return self.id
+        return self.filename
