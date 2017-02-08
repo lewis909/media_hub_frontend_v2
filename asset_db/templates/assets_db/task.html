@@ -1,8 +1,22 @@
 {% extends 'website/header.html' %}
 {% block content %}
-
-    {% for i in object_list %}
-        <a href="task.html/{{ i.id}}">{{i.material_id}} | {{ i.workflow }} | {{ i.status }} | {{ i.user }}</a><br/>
-    {% endfor %}
+    <table class="table">
+        <tr>
+            <th>Task ID</th>
+            <th>Material ID</th>
+            <th>Workflow</th>
+            <th>Job Status</th>
+            <th>User</th>
+        </tr>
+        {%  for i in object_list %}
+            <tr>
+                <td>{{i.id|stringformat:"06d"}}</td>
+                <td>{{i.material_id}}</td>
+                <td>{{i.workflow}}</td>
+                <td>{{i.status}}</td>
+                <td>{{i.user}}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}
