@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'asset_db',
     'media_hub',
     'website',
+    'submit',
 ]
 
 MIDDLEWARE = [
