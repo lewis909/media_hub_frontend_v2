@@ -1,7 +1,7 @@
 from django.conf.urls import url
-from django.views.generic import ListView
-from asset_db.models import Profiles
+from . import views
 
 urlpatterns = [
-    url(r'^$', ListView.as_view(queryset=Profiles.objects.all().order_by("id"), template_name='submit/submit.html')),
+    url(r'^$', views.submit, name='submit'),
+    url(r'^success/', views.success, name='success'),
 ]
