@@ -3,7 +3,10 @@
     <p><b>Submit Job</b></p>
     <form action="{% url 'success' %}" method="post">
     {% csrf_token %}
-        <p>Test</p>
+        <p>{{ matid }} has been submitted</p>
+        <p>{{ workflow }} has been submitted</p>
+        <p>{{ start_date }} has been submitted</p>
+        <p>{{ end_date }} has been submitted</p>
         <b>Select Asset to transcode</b>
         <p>Material ID:
             <input type="text" name="material_id" size="30" value="" id="keyword"/>
