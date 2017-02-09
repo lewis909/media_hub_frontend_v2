@@ -19,6 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('website.urls')),
-    url(r'^submit/', include('submit.urls')),
+    url(r'^job/', include('submit.urls')),
     url(r'^repo/', include('asset_db.urls')),
 ]

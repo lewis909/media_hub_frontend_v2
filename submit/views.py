@@ -1,22 +1,20 @@
-from django.shortcuts import render
 from asset_db.models import Profiles
+from django.shortcuts import render_to_response, render
+
+from .forms import SubmitJob
 
 
-def submit(request):
-    profiles = Profiles.objects.order_by('-id')
-    context = {'profiles': profiles}
-    return render(request, 'submit/submit.html', context)
+def job(request):
+    if request.method == 'POST':
+        form = SubmitJob(request.POST)
 
+        if(form.is_valid()):
+            print(request.POST['material_id'])
+            print(request.POST['workflow'])
+            message = 'success'
+        else:
+            message = 'fail'
+        return render(request, 'submit/submit.html', {'message': message})
+    else:
+        return render(request, 'submit/submit.html', {'form': SubmitJob()})
 
-def success(request):
-    profiles = Profiles.objects.order_by('-id')
-    matid = request.POST['material_id']
-    workflow = request.POST['workflow']
-    start_date = request.POST['start_date']
-    end_date = request.POST['end_date']
-    context = {'profiles': profiles,
-               'matid': matid,
-               'workflow': workflow,
-               'start_date': start_date,
-               'end_date': end_date}
-    return render(request, 'submit/success.html', context)
