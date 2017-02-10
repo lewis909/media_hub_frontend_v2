@@ -25,7 +25,7 @@ SECRET_KEY = 'lpd!g8x5ba=f9ib2-3y+mfs*2g*f$39#v86+@2kp(8&w-bm$jq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.84', '127.0.0.1']
 
 
 # Application definition
