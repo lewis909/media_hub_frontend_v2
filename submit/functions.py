@@ -30,7 +30,9 @@ def create_core_xml(filename,
                     segment_4,
                     conform_profile,
                     transcode_profile,
-                    target_path):
+                    target_path,
+                    segment_start,
+                    segment_dur):
 
     core_xml_base = os.path.splitext(os.path.basename(filename))[0]
     manifest = ET.Element('manifest')
@@ -53,9 +55,12 @@ def create_core_xml(filename,
     ET.SubElement(file_info, 'number_of_segments',).text = str(number_of_segments)
 
     # TODO: Create dynamic segment creation.
-    """
+
     for i in range(int(number_of_segments)):
-        ET.SubElement(file_info, 'segment_%d' % i, ).text = str(segment_1)
+        seg = ET.SubElement(file_info, 'segment_%d' % i)
+        i -= 1
+        seg.set('seg_%d_start' % i, segment_start[int('%d' % i)])
+        seg.set('seg_%d_end' % i, segment_dur[int('%d' % i)])
     """
     if number_of_segments == '1':
         ET.SubElement(file_info, 'segment_1',).text = str(segment_1)
@@ -71,7 +76,7 @@ def create_core_xml(filename,
         ET.SubElement(file_info, 'segment_2', ).text = str(segment_2)
         ET.SubElement(file_info, 'segment_2', ).text = str(segment_3)
         ET.SubElement(file_info, 'segment_2', ).text = str(segment_4)
-
+    """
     ET.SubElement(file_info, 'conform_profile', ).text = str(conform_profile)
     ET.SubElement(file_info, 'transcode_profile', ).text = str(transcode_profile)
     ET.SubElement(file_info, 'target_path', ).text = str(target_path)
