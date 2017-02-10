@@ -1,5 +1,5 @@
-from django.conf.urls import url, include
-from django.views.generic import ListView, DetailView
+from django.conf.urls import url
+from django.views.generic import ListView
 from asset_db.models import AssetMetadata, Task
 
 urlpatterns = [
