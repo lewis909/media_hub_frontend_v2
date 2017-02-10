@@ -1,5 +1,5 @@
-from asset_db.models import Profiles, Task
-from django.shortcuts import render_to_response, render
+from asset_db.models import Task
+from django.shortcuts import render
 
 from .forms import SubmitJob
 
@@ -11,14 +11,15 @@ def job(request):
             insert = Task()
             insert.material_id = str(request.POST['material_id'])
             insert.workflow = str(request.POST['workflow'])
+            insert.status = 'Submitted'
             insert.save()
             print(request.POST['material_id'])
             print(request.POST['workflow'])
-            message = 'success'
-
+            message = 'success ' + request.POST['material_id'] + ' has been submitted'
         else:
             message = 'fail'
-        return render(request, 'submit/submit.html', {'message': message})
+        return render(request, 'submit/submit.html', {'form': SubmitJob(),
+                                                      'message': message})
     else:
         return render(request, 'submit/submit.html', {'form': SubmitJob()})
 
