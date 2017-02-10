@@ -2,6 +2,11 @@
 {% block content %}
     <p><b>Submit Job</b></p>
     <form action="{% url 'job' %}" method="post">{% csrf_token %}
+        <script>
+            $(document).ready(function() {
+                $('.datepicker').datepicker();
+            });
+        </script>
         <p>{{ message }}</p>
         <b>Select Asset to transcode</b>
         {{form.as_p}}
