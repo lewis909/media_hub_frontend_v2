@@ -1,5 +1,6 @@
 from asset_db.models import Task
 from django.shortcuts import render
+from .functions import timestamp
 
 from .forms import SubmitJob
 
@@ -12,6 +13,7 @@ def job(request):
             insert.material_id = str(request.POST['material_id'])
             insert.workflow = str(request.POST['workflow'])
             insert.status = 'Submitted'
+            insert.job_start_time = timestamp()
             insert.save()
             print(request.POST['material_id'])
             print(request.POST['workflow'])
