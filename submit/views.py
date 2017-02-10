@@ -15,9 +15,10 @@ def job(request):
             insert.status = 'Submitted'
             insert.job_start_time = timestamp()
             insert.save()
+            task_id = insert.id
             print(request.POST['material_id'])
             print(request.POST['workflow'])
-            message = 'success ' + request.POST['material_id'] + ' has been submitted'
+            message = 'Task ' + str(task_id) + ' success.' + '\n' + request.POST['material_id'] + ' has been submitted'
         else:
             message = 'fail'
         return render(request, 'submit/submit.html', {'form': SubmitJob(),
