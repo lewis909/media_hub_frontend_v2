@@ -24,10 +24,6 @@ def create_core_xml(filename,
                     ratings,
                     source_filename,
                     number_of_segments,
-                    segment_1,
-                    segment_2,
-                    segment_3,
-                    segment_4,
                     conform_profile,
                     transcode_profile,
                     target_path,
@@ -54,29 +50,13 @@ def create_core_xml(filename,
     ET.SubElement(file_info, 'source_filename',).text = str(source_filename)
     ET.SubElement(file_info, 'number_of_segments',).text = str(number_of_segments)
 
-    # TODO: Create dynamic segment creation.
-
     for i in range(int(number_of_segments)):
+        i += 1
+        x = i - 1
         seg = ET.SubElement(file_info, 'segment_%d' % i)
-        i -= 1
-        seg.set('seg_%d_start' % i, segment_start[int('%d' % i)])
-        seg.set('seg_%d_end' % i, segment_dur[int('%d' % i)])
-    """
-    if number_of_segments == '1':
-        ET.SubElement(file_info, 'segment_1',).text = str(segment_1)
-    elif number_of_segments == '2':
-        ET.SubElement(file_info, 'segment_1', ).text = str(segment_1)
-        ET.SubElement(file_info, 'segment_2', ).text = str(segment_2)
-    elif number_of_segments == '3':
-        ET.SubElement(file_info, 'segment_1', ).text = str(segment_1)
-        ET.SubElement(file_info, 'segment_2', ).text = str(segment_2)
-        ET.SubElement(file_info, 'segment_3', ).text = str(segment_3)
-    elif number_of_segments == '4':
-        ET.SubElement(file_info, 'segment_1', ).text = str(segment_1)
-        ET.SubElement(file_info, 'segment_2', ).text = str(segment_2)
-        ET.SubElement(file_info, 'segment_2', ).text = str(segment_3)
-        ET.SubElement(file_info, 'segment_2', ).text = str(segment_4)
-    """
+        seg.set('seg_%d_start' % i, str(segment_start[int('%d' % x)]))
+        seg.set('seg_%d_end' % i, str(segment_dur[int('%d' % x)]))
+
     ET.SubElement(file_info, 'conform_profile', ).text = str(conform_profile)
     ET.SubElement(file_info, 'transcode_profile', ).text = str(transcode_profile)
     ET.SubElement(file_info, 'target_path', ).text = str(target_path)
