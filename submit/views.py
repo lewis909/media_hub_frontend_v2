@@ -1,6 +1,6 @@
-from asset_db.models import Task, FileRepo
+from asset_db.models import Task, FileRepo, AssetMetadata
 from django.shortcuts import render
-from .functions import timestamp
+from .functions import timestamp, create_core_xml
 
 from .forms import SubmitJob
 
@@ -27,6 +27,9 @@ def job(request):
                 print(request.POST['end_datepicker'])
                 message = 'Task ' + str(task_id) + ' success.' + '\n' + request.POST[
                     'material_id'] + ' has been submitted'
+
+                asset = AssetMetadata.objects.filter(material_id=str(request.POST['material_id'])).values().all()
+                print(asset)
             else:
                 message = 'fail'
             return render(request, 'submit/submit.html', {'form': SubmitJob(),
