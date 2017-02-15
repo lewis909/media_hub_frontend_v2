@@ -10,33 +10,33 @@ def job(request):
     filerepo = FileRepo.objects.values_list('filename', flat=True)
 
     if request.method == 'POST':
-        if request.POST['material_id'] in filerepo:
-            print('true')
+        
+        mat_id_post = request.POST['material_id']
+        
+        if mat_id_post in filerepo:
             form = SubmitJob(request.POST)
             if form.is_valid():
                 insert = Task()
-                insert.material_id = str(request.POST['material_id'])
+                insert.material_id = str(mat_id_post)
                 insert.workflow = str(request.POST['workflow'])
                 insert.status = 'Submitted'
                 insert.job_start_time = timestamp()
                 insert.save()
                 task_id = insert.id
-                print(request.POST['material_id'])
-                print(request.POST['workflow'])
-                print(request.POST['start_datepicker'])
-                print(request.POST['end_datepicker'])
                 message = 'Task ' + str(task_id) + ' success.' + '\n' + request.POST[
                     'material_id'] + ' has been submitted'
 
-                asset = AssetMetadata.objects.filter(material_id=str(request.POST['material_id'])).values().all()
-                print(asset)
+                asset_check = AssetMetadata.objects.filter(material_id=str(mat_id_post)).values().all()
+                filerepo_check = FileRepo.objects.filter(filename=str(mat_id_post)).values().all()
+                create_core_xml()
+                print(asset_check[0])
+                print(filerepo_check[0])
             else:
                 message = 'fail'
             return render(request, 'submit/submit.html', {'form': SubmitJob(),
                                                           'message': message})
         else:
-            print('false')
-            message = request.POST['material_id'] + ' is not in the File Repository, please ingest'
+            message = mat_id_post + ' is not in the File Repository, please ingest'
             return render(request, 'submit/submit.html', {'form': SubmitJob(), 'message': message})
     else:
         return render(request, 'submit/submit.html', {'form': SubmitJob()})
