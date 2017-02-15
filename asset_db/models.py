@@ -60,7 +60,7 @@ class FileRepo(models.Model):
     filename = models.CharField(max_length=256, default='null')
     definition = models.CharField(max_length=256, default='null')
     aspect_ratio = models.CharField(max_length=256, default='null')
-    number_of_segments = models.DecimalField.auto_creation_counter
+    number_of_segments = models.CharField(max_length=2, default='null')
     seg_1_in = models.CharField(max_length=12, default='null')
     seg_1_dur = models.CharField(max_length=12, default='null')
     seg_2_in = models.CharField(max_length=12, default='null')
