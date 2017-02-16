@@ -28,7 +28,31 @@ def job(request):
 
                 asset_check = AssetMetadata.objects.filter(material_id=str(mat_id_post)).values().all()
                 filerepo_check = FileRepo.objects.filter(filename=str(mat_id_post)).values().all()
-                create_core_xml()
+                core_xml_target_path = ''
+                core_xml_filename = ''
+                segment_start = []
+                segment_dur = []
+                create_core_xml(core_xml_filename,
+                                core_xml_target_path,
+                                asset_check.get('material_id'),
+                                asset_check.get('series_id'),
+                                asset_check.get('season_title'),
+                                asset_check.get('season_number'),
+                                asset_check.get('episode_title'),
+                                asset_check.get('episode_number'),
+                                asset_check.get('start_date'),
+                                asset_check.get('end_date'),
+                                asset_check.get('synopsis'),
+                                asset_check.get('ratings'),
+                                filerepo_check.get('filename'),
+                                filerepo_check.get('number_of_segments'),
+                                filerepo_check.get('conform_profile'),
+                                filerepo_check.get('transcode_profile'),
+                                filerepo_check.get('target_path'),
+                                filerepo_check.get('segment_start'),
+                                segment_start,
+                                segment_dur
+                                )
                 print(asset_check[0])
                 print(filerepo_check[0])
             else:
