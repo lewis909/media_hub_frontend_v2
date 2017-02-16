@@ -62,5 +62,5 @@ def create_core_xml(filename,
     ET.SubElement(file_info, 'target_path', ).text = str(target_path)
 
     xmlstr = minidom.parseString(ET.tostring(manifest)).toprettyxml(indent="   ")
-    with open(source_path + core_xml_base + timestamp()[:12] + '.xml', "w") as f:
+    with open(source_path + core_xml_base + timestamp()[:10] + '.xml', "w") as f:
         f.write(xmlstr)
