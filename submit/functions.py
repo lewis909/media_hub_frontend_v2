@@ -10,10 +10,10 @@ def timestamp():
 
 
 def create_core_xml(filename,
-                    path,
+                    source_path,
                     task_id,
                     material_id,
-                    series_id,
+                    series_title,
                     season_title,
                     season_number,
                     episode_title,
@@ -37,7 +37,7 @@ def create_core_xml(filename,
     file_info = ET.SubElement(manifest, 'file_info')
 
     ET.SubElement(asset_metadata, 'material_id',).text = str(material_id)
-    ET.SubElement(asset_metadata, 'series_title',).text = str(series_id)
+    ET.SubElement(asset_metadata, 'series_title',).text = str(series_title)
     ET.SubElement(asset_metadata, 'season_title',).text = str(season_title)
     ET.SubElement(asset_metadata, 'season_number',).text = str(season_number)
     ET.SubElement(asset_metadata, 'episode_title',).text = str(episode_title)
@@ -62,5 +62,5 @@ def create_core_xml(filename,
     ET.SubElement(file_info, 'target_path', ).text = str(target_path)
 
     xmlstr = minidom.parseString(ET.tostring(manifest)).toprettyxml(indent="   ")
-    with open(path + core_xml_base + '.xml', "w") as f:
+    with open(source_path + core_xml_base + timestamp()[:12] + '.xml', "w") as f:
         f.write(xmlstr)
