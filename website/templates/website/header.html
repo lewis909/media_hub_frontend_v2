@@ -16,6 +16,18 @@
 		body {
 		  height:100%
 		}
+        footer {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    padding: 32px;
+        }
+        footer a {
+            color: #f5f5f5;
+        }
+        footer a:hover {
+            color: #777;
+            text-decoration: none;
+        }
 	</style>
 </head>
 <body class="body" style="background-color: #9d9d9d">
@@ -31,16 +43,16 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{% url 'index' %}">Home</a></li>
+        <li class="active"><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">File Repo<span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-hdd"></span> File Repo<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/repo/">Asset Metadata</a></li>
             <li><a href="/repo/task">Files</a></li>
           </ul>
         </li>
-        <li><a href="/repo/task">Task Status</a></li>
-        <li><a href="/job/">Submit Job</a></li>
+        <li><a href="/repo/task"><span class="glyphicon glyphicon-stats"></span> Task Status</a></li>
+          <li><a href="/job/"><span class="glyphicon glyphicon-send"></span> Submit Job</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -53,5 +65,11 @@
         {% block content %}
         {% endblock %}
     </div>
+    <footer class="text-center">
+        <a class="up-arrow" href="#top" data-toggle="tooltip" title="TO TOP">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+        </a><br><br>
+        <p><a href="/blog/" data-toggle="tooltip" >Back to the top</a></p>
+    </footer>
 </body>
 </html>
