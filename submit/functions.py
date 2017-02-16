@@ -27,12 +27,16 @@ def create_core_xml(filename,
                     conform_profile,
                     transcode_profile,
                     target_path,
+                    con_def,
+                    con_aspect_ratio,
+                    profile_name,
+                    package_type,
                     segment_start,
                     segment_dur):
 
     core_xml_base = os.path.splitext(os.path.basename(filename))[0]
     manifest = ET.Element('manifest')
-    manifest.set('task_id', task_id)
+    manifest.set('task_id', str(task_id))
     asset_metadata = ET.SubElement(manifest, 'asset_metadata')
     file_info = ET.SubElement(manifest, 'file_info')
 
@@ -55,10 +59,14 @@ def create_core_xml(filename,
         x = i - 1
         seg = ET.SubElement(file_info, 'segment_%d' % i)
         seg.set('seg_%d_start' % i, str(segment_start[int('%d' % x)]))
-        seg.set('seg_%d_end' % i, str(segment_dur[int('%d' % x)]))
+        seg.set('seg_%d_dur' % i, str(segment_dur[int('%d' % x)]))
 
-    ET.SubElement(file_info, 'conform_profile', ).text = str(conform_profile)
-    ET.SubElement(file_info, 'transcode_profile', ).text = str(transcode_profile)
+    con = ET.SubElement(file_info, 'conform_profile', ).text = str(conform_profile)
+    con.set('definition', con_def)
+    con.set('definition', con_aspect_ratio)
+    tran = ET.SubElement(file_info, 'transcode_profile', ).text = str(transcode_profile)
+    tran.set('profile_name', profile_name)
+    tran.set('package_type', package_type)
     ET.SubElement(file_info, 'target_path', ).text = str(target_path)
 
     xmlstr = minidom.parseString(ET.tostring(manifest)).toprettyxml(indent="   ")

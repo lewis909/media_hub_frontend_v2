@@ -28,33 +28,54 @@ def job(request):
 
                 asset_check = AssetMetadata.objects.filter(material_id=str(mat_id_post)).values().all()
                 filerepo_check = FileRepo.objects.filter(filename=str(mat_id_post)).values().all()
-                core_xml_target_path = ''
-                core_xml_filename = ''
                 segment_start = []
                 segment_dur = []
-                create_core_xml(core_xml_filename,
-                                core_xml_target_path,
-                                asset_check.get('material_id'),
-                                asset_check.get('series_id'),
-                                asset_check.get('season_title'),
-                                asset_check.get('season_number'),
-                                asset_check.get('episode_title'),
-                                asset_check.get('episode_number'),
-                                asset_check.get('start_date'),
-                                asset_check.get('end_date'),
-                                asset_check.get('synopsis'),
-                                asset_check.get('ratings'),
-                                filerepo_check.get('filename'),
-                                filerepo_check.get('number_of_segments'),
-                                filerepo_check.get('conform_profile'),
-                                filerepo_check.get('transcode_profile'),
-                                filerepo_check.get('target_path'),
-                                filerepo_check.get('segment_start'),
+
+                for i in range(int(filerepo_check[0].get('number_of_segments'))):
+                    x = i + 1
+                    seg = filerepo_check[0].get('seg_%d_in' % x)
+                    segment_start.append(seg)
+
+                for i in range(int(filerepo_check[0].get('number_of_segments'))):
+                    x = i + 1
+                    seg = filerepo_check[0].get('seg_%d_dur' % x)
+                    segment_dur.append(seg)
+
+                print(filerepo_check[0].get('number_of_segments'))
+
+                """
+                core_xml_target_path = ''
+                core_xml_filename = ''
+                """
+
+                print(segment_start)
+                print(segment_dur)
+
+
+                create_core_xml('core_xml_filename',
+                                '',
+                                task_id,
+                                asset_check[0].get('material_id'),
+                                asset_check[0].get('series_id'),
+                                asset_check[0].get('season_title'),
+                                asset_check[0].get('season_number'),
+                                asset_check[0].get('episode_title'),
+                                asset_check[0].get('episode_number'),
+                                asset_check[0].get('start_date'),
+                                asset_check[0].get('end_date'),
+                                asset_check[0].get('synopsis'),
+                                asset_check[0].get('ratings'),
+                                filerepo_check[0].get('filename'),
+                                filerepo_check[0].get('number_of_segments'),
+                                filerepo_check[0].get('conform_profile'),
+                                filerepo_check[0].get('transcode_profile'),
+                                filerepo_check[0].get('target_path'),
                                 segment_start,
                                 segment_dur
                                 )
-                print(asset_check[0])
-                print(filerepo_check[0])
+
+
+
             else:
                 message = 'fail'
             return render(request, 'submit/submit.html', {'form': SubmitJob(),
