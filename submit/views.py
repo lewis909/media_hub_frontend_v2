@@ -1,4 +1,4 @@
-from asset_db.models import Task, FileRepo, AssetMetadata
+from asset_db.models import Task, FileRepo, AssetMetadata, Profiles, ConformProfiles
 from django.shortcuts import render
 from .functions import timestamp, create_core_xml
 
@@ -12,7 +12,8 @@ def job(request):
     if request.method == 'POST':
         
         mat_id_post = request.POST['material_id']
-        
+        workflow = request.POST['workflow']
+
         if mat_id_post in filerepo:
             form = SubmitJob(request.POST)
             if form.is_valid():
@@ -26,8 +27,12 @@ def job(request):
                 message = 'Task ' + str(task_id) + ' success.' + '\n' + request.POST[
                     'material_id'] + ' has been submitted'
 
+                # TODO: Build conform format logic.
+
                 asset_check = AssetMetadata.objects.filter(material_id=str(mat_id_post)).values().all()
                 filerepo_check = FileRepo.objects.filter(filename=str(mat_id_post)).values().all()
+                profile_check = Profiles.objects.filter(filename=str(workflow)).values().all()
+                conform_check = ConformProfiles.objects.filter(filename=str(filerepo_check[0].get('filename'))).values().all()
                 segment_start = []
                 segment_dur = []
 
@@ -68,8 +73,12 @@ def job(request):
                                 filerepo_check[0].get('filename'),
                                 filerepo_check[0].get('number_of_segments'),
                                 filerepo_check[0].get('conform_profile'),
-                                filerepo_check[0].get('transcode_profile'),
+                                profile_check[0].get('transcode_profile'),
                                 filerepo_check[0].get('target_path'),
+                                conform_check[0].get('definition'),
+                                conform_check[0].get('aspect_ratio'),
+                                profile_check[0].get('profile_name'),
+                                profile_check[0].get('package_type'),
                                 segment_start,
                                 segment_dur
                                 )
