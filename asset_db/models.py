@@ -34,7 +34,6 @@ class Profiles(models.Model):
 
 class ConformProfiles(models.Model):
 
-    id = models.DecimalField.auto_creation_counter
     name = models.CharField(max_length=256, default='null')
     conform_profile = models.TextField(max_length=1024, default='null')
 
