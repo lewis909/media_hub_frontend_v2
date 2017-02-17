@@ -58,7 +58,7 @@ def job(request):
                     segment_dur.append(seg)
 
                 core_xml_target = 'F:\\Transcoder\\staging\prep\\'
-                core_xml_file_name = str(task_id) + '_' + str(asset_check[0].get('material_id')) + '_'
+                core_xml_file_name = str(task_id) + '_' + str(profile_check[0].get('name')) + '_' + str(asset_check[0].get('material_id')) + '_'
 
                 create_core_xml(core_xml_file_name,
                                 core_xml_target,
