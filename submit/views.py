@@ -31,8 +31,22 @@ def job(request):
 
                 asset_check = AssetMetadata.objects.filter(material_id=str(mat_id_post)).values().all()
                 filerepo_check = FileRepo.objects.filter(filename=str(mat_id_post)).values().all()
-                profile_check = Profiles.objects.filter(filename=str(workflow)).values().all()
-                conform_check = ConformProfiles.objects.filter(filename=str(filerepo_check[0].get('filename'))).values().all()
+
+                file_aspect_ratio = filerepo_check[0].get('aspect_ratio')
+                file_def = filerepo_check[0].get('definition')
+                standard = ''
+
+                if file_aspect_ratio == '12f16' and file_def == 'SD':
+                    standard = 'sd169'
+                elif file_aspect_ratio == '16f16' and file_def == 'SD':
+                    standard = 'sd169'
+                elif file_aspect_ratio == '12f12' and file_def == 'SD':
+                    standard = 'sd43'
+                elif file_aspect_ratio == '16f16' and file_def == 'HD':
+                    standard = 'hd'
+
+                profile_check = Profiles.objects.filter(name=str(workflow)).values().all()
+                conform_check = ConformProfiles.objects.filter(name=standard).values().all()
                 segment_start = []
                 segment_dur = []
 
@@ -51,10 +65,12 @@ def job(request):
                 """
                 core_xml_target_path = ''
                 core_xml_filename = ''
+                conform_check[0].get('name')
                 """
 
                 print(segment_start)
                 print(segment_dur)
+
 
 
                 create_core_xml('core_xml_filename',
@@ -66,21 +82,24 @@ def job(request):
                                 asset_check[0].get('season_number'),
                                 asset_check[0].get('episode_title'),
                                 asset_check[0].get('episode_number'),
-                                asset_check[0].get('start_date'),
-                                asset_check[0].get('end_date'),
+                                str(request.POST['start_datepicker']),
+                                str(request.POST['end_datepicker']),
                                 asset_check[0].get('synopsis'),
                                 asset_check[0].get('ratings'),
                                 filerepo_check[0].get('filename'),
                                 filerepo_check[0].get('number_of_segments'),
-                                filerepo_check[0].get('conform_profile'),
-                                profile_check[0].get('transcode_profile'),
-                                filerepo_check[0].get('target_path'),
-                                conform_check[0].get('definition'),
-                                conform_check[0].get('aspect_ratio'),
-                                profile_check[0].get('profile_name'),
+                                conform_check[0].get('conform_profile'),
+                                profile_check[0].get('target_profile'),
+                                profile_check[0].get('target_path'),
+                                file_def,
+                                file_aspect_ratio,
+                                profile_check[0].get('name'),
                                 profile_check[0].get('package_type'),
                                 segment_start,
-                                segment_dur
+                                segment_dur,
+                                profile_check[0].get('video_naming_convention'),
+                                profile_check[0].get('image_naming_convention'),
+                                profile_check[0].get('package_naming_convention')
                                 )
 
 

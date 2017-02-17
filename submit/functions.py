@@ -32,7 +32,10 @@ def create_core_xml(filename,
                     profile_name,
                     package_type,
                     segment_start,
-                    segment_dur):
+                    segment_dur,
+                    video_naming_convention,
+                    image_naming_convention,
+                    package_naming_convention):
 
     core_xml_base = os.path.splitext(os.path.basename(filename))[0]
     manifest = ET.Element('manifest')
@@ -69,7 +72,10 @@ def create_core_xml(filename,
     tran.set('profile_name', str(profile_name))
     tran.set('package_type', str(package_type))
     tran.text = str(transcode_profile)
-    ET.SubElement(file_info, 'target_path' ).text = str(target_path)
+    ET.SubElement(file_info, 'target_path').text = str(target_path)
+    ET.SubElement(file_info, 'video_file_naming_convention').text = str(video_naming_convention)
+    ET.SubElement(file_info, 'image_file_naming_convention').text = str(image_naming_convention)
+    ET.SubElement(file_info, 'package_naming_convention').text = str(package_naming_convention)
 
     xmlstr = minidom.parseString(ET.tostring(manifest)).toprettyxml(indent="   ")
     with open(source_path + core_xml_base + timestamp()[:10] + '.xml', "w") as f:
