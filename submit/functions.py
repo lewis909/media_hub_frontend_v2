@@ -6,7 +6,7 @@ from xml.dom import minidom
 
 
 def timestamp():
-    return str(datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"))
+    return str(datetime.datetime.utcnow().strftime("%Y%m%d%H%M%S"))
 
 
 def create_core_xml(filename,
@@ -78,5 +78,5 @@ def create_core_xml(filename,
     ET.SubElement(file_info, 'package_naming_convention').text = str(package_naming_convention)
 
     xmlstr = minidom.parseString(ET.tostring(manifest)).toprettyxml(indent="   ")
-    with open(source_path + core_xml_base + timestamp()[:10] + '.xml', "w") as f:
+    with open(source_path + 't_' + core_xml_base + timestamp() + '.xml', "w") as f:
         f.write(xmlstr)
