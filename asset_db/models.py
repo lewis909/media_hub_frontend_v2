@@ -50,6 +50,7 @@ class Task(models.Model):
     job_end_time = models.CharField(max_length=256, default='null')
     user = models.CharField(max_length=256, default='null')
 
+
     def __str__(self):
         return str(self.id)
 
