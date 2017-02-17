@@ -6,7 +6,6 @@ from .forms import SubmitJob
 
 
 def job(request):
-
     filerepo = FileRepo.objects.values_list('filename', flat=True)
 
     if request.method == 'POST':
@@ -23,11 +22,9 @@ def job(request):
                 insert.status = 'Submitted'
                 insert.job_start_time = timestamp()
                 insert.save()
-                task_id = insert.id
+                task_id = "%06d" % insert.id
                 message = 'Task ' + str(task_id) + ' success.' + '\n' + request.POST[
                     'material_id'] + ' has been submitted'
-
-                # TODO: Build conform format logic.
 
                 asset_check = AssetMetadata.objects.filter(material_id=str(mat_id_post)).values().all()
                 filerepo_check = FileRepo.objects.filter(filename=str(mat_id_post)).values().all()
@@ -60,21 +57,11 @@ def job(request):
                     seg = filerepo_check[0].get('seg_%d_dur' % x)
                     segment_dur.append(seg)
 
-                print(filerepo_check[0].get('number_of_segments'))
+                core_xml_target = 'F:\\Transcoder\\staging\prep\\'
+                core_xml_file_name = str(task_id) + '_' + str(asset_check[0].get('material_id')) + '_'
 
-                """
-                core_xml_target_path = ''
-                core_xml_filename = ''
-                conform_check[0].get('name')
-                """
-
-                print(segment_start)
-                print(segment_dur)
-
-
-
-                create_core_xml('core_xml_filename',
-                                '',
+                create_core_xml(core_xml_file_name,
+                                core_xml_target,
                                 task_id,
                                 asset_check[0].get('material_id'),
                                 asset_check[0].get('series_id'),
@@ -101,9 +88,6 @@ def job(request):
                                 profile_check[0].get('image_naming_convention'),
                                 profile_check[0].get('package_naming_convention')
                                 )
-
-
-
             else:
                 message = 'fail'
             return render(request, 'submit/submit.html', {'form': SubmitJob(),

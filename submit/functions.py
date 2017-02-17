@@ -61,7 +61,7 @@ def create_core_xml(filename,
         i += 1
         x = i - 1
         seg = ET.SubElement(file_info, 'segment_%d' % i)
-        seg.set('seg_%d_start' % i, str(segment_start[int('%d' % x)]))
+        seg.set('seg_%d_in' % i, str(segment_start[int('%d' % x)]))
         seg.set('seg_%d_dur' % i, str(segment_dur[int('%d' % x)]))
 
     con = ET.SubElement(file_info, 'conform_profile')
