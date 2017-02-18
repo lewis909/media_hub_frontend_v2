@@ -1,16 +1,17 @@
 from asset_db.models import Task, FileRepo, AssetMetadata, Profiles, ConformProfiles
 from django.shortcuts import render
 from .functions import timestamp, create_core_xml
+from django.views.generic import ListView
 
 from .forms import SubmitJob
 
 
 def job(request):
     filerepo = FileRepo.objects.values_list('filename', flat=True)
-
+    asset_mat_id = AssetMetadata.objects.all()
     if request.method == 'POST':
         
-        mat_id_post = request.POST['material_id']
+        mat_id_post = str(request.POST['material_id']).upper()
         workflow = request.POST['workflow']
 
         if mat_id_post in filerepo:
@@ -23,8 +24,7 @@ def job(request):
                 insert.job_start_time = timestamp()
                 insert.save()
                 task_id = "%06d" % insert.id
-                message = 'Task ' + str(task_id) + ' success.' + '\n' + request.POST[
-                    'material_id'] + ' has been submitted'
+                message = 'Task ' + str(task_id) + ' success.' + '\n' + mat_id_post + ' has been submitted'
 
                 asset_check = AssetMetadata.objects.filter(material_id=str(mat_id_post)).values().all()
                 filerepo_check = FileRepo.objects.filter(filename=str(mat_id_post)).values().all()
@@ -91,9 +91,14 @@ def job(request):
             else:
                 message = 'fail'
             return render(request, 'submit/submit.html', {'form': SubmitJob(),
-                                                          'message': message})
+                                                          'message': message,
+                                                          'asset_matid': asset_mat_id})
         else:
             message = mat_id_post + ' is not in the File Repository, please ingest'
-            return render(request, 'submit/submit.html', {'form': SubmitJob(), 'message': message})
+            return render(request, 'submit/submit.html', {'form': SubmitJob(),
+                                                          'message': message,
+                                                          'asset_matid': asset_mat_id})
     else:
-        return render(request, 'submit/submit.html', {'form': SubmitJob()})
+
+        return render(request, 'submit/submit.html', {'form': SubmitJob(),
+                                                      'asset_matid': asset_mat_id})

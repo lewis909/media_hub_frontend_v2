@@ -7,6 +7,18 @@
                 $('.datepicker').datepicker();
             });
         </script>
+        <script>
+          $( function() {
+            var availableTags = [
+                {%  for i in asset_matid %}
+                    "{{ i }}",
+                {%  endfor %}
+            ];
+            $( "#id_material_id" ).autocomplete({
+              source: availableTags
+            });
+          } );
+        </script>
         <p>{{ message }}</p>
         <b>Select Asset to transcode</b>
         {{form.as_p}}
