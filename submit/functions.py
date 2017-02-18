@@ -77,6 +77,6 @@ def create_core_xml(filename,
     ET.SubElement(file_info, 'image_file_naming_convention').text = str(image_naming_convention)
     ET.SubElement(file_info, 'package_naming_convention').text = str(package_naming_convention)
 
-    xmlstr = minidom.parseString(ET.tostring(manifest)).toprettyxml(indent="   ")
-    with open(source_path + 't_' + core_xml_base + timestamp() + '.xml', "w") as f:
+    xmlstr = minidom.parseString(ET.tostring(manifest)).toprettyxml(indent="   ", encoding="utf-8")
+    with open(source_path + 't_' + core_xml_base + timestamp() + '.xml', "w+b") as f:
         f.write(xmlstr)
