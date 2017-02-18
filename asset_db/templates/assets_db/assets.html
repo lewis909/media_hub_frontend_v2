@@ -1,8 +1,85 @@
 {% extends 'website/header.html' %}
 {% block content %}
+    <h1>Assets</h1>
 
-    {% for i in object_list %}
-        <p>{{i.material_id}} | {{ i.series_title }} | {{ i.season_number }}</p>
-    {% endfor %}
+    <p><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Material ID ..." title="Type in a Material ID"></p>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+
+                    <a href="/repo?page={{ page_obj.previous_page_number }}">previous</a>
+
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/repo?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    <table class="table table-striped" id="myTable">
+        <tr>
+            <th>ID</th>
+            <th>Material ID</th>
+            <th>Series Title</th>
+            <th>Season Tile</th>
+            <th>Season Number</th>
+            <th>Episode Title</th>
+            <th>Episode Number</th>
+        </tr>
+        {%  for i in object_list %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td><a href="/repo/{{ i.id}}">{{i.material_id}}</a></td>
+                <td>{{i.series_title}}</td>
+                <td>{{i.season_title}}</td>
+                <td>{{i.season_number}}</td>
+                <td>{{i.episode_title}}</td>
+                <td>{{i.episode_number}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+
+                    <a href="/repo?page={{ page_obj.previous_page_number }}">previous</a>
+
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/repo?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    <script>
+        function myFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
 
 {% endblock %}
