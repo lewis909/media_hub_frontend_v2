@@ -1,0 +1,25 @@
+{% extends 'website/header.html' %}
+{% block content %}
+    {% load staticfiles %}
+
+    <h1>{{ object.material_id }}</h1>
+    <p><video width="400" controls>
+    <source src="{% static 'website/proxies/' %}{{ object.material_id }}.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+    </video></p>
+    <label>Series Title</label>
+    <p>{{ object.series_title }}</p>
+    <label>Season Title</label>
+    <p>{{ object.season_title }}</p>
+    <label>Season Number</label>
+    <p>{{ object.season_number }}</p>
+    <label>Episode Title</label>
+    <p>{{ object.Episode_title }}</p>
+    <label>Episode Number</label>
+    <p>{{ object.episode_number }}</p>
+    <label>Ratings</label>
+    <p>{{ object.ratings }}</p>
+    <label>Synopsis</label>
+    <p>{{ object.synopsis }}</p>
+
+{% endblock %}
