@@ -1,0 +1,15 @@
+{% extends "website/header.html" %}
+
+{% block content %}
+
+    {% if sign_up.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <p>sign_up</p>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+       <input type="submit" value="login" />
+   </form>
+
+{% endblock %}

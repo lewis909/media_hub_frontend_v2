@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views
+from login_system.views import UserFormView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('website.urls')),
+    url(r'^reg/$', UserFormView.as_view(), name='reg'),
+    url(r'^home/', include('website.urls')),
+    url(r'^$', views.login,  {'template_name': 'login_system/login.html'}, name='login'),
+    url(r'^logout/', views.logout, {'template_name': 'login_system/logout.html'}, name='logout'),
     url(r'^job/', include('submit.urls')),
     url(r'^repo/', include('asset_db.urls')),
 ]

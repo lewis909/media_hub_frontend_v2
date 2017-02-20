@@ -1,14 +1,15 @@
 from asset_db.models import Task, FileRepo, AssetMetadata, Profiles, ConformProfiles
 from django.shortcuts import render
 from .functions import timestamp, create_core_xml
-from django.views.generic import ListView
-
+from django.contrib.auth.decorators import login_required
 from .forms import SubmitJob
 
 
+@login_required(login_url='login')
 def job(request):
     filerepo = FileRepo.objects.values_list('filename', flat=True)
     asset_mat_id = AssetMetadata.objects.all()
+
     if request.method == 'POST':
         
         mat_id_post = str(request.POST['material_id']).upper()
