@@ -20,6 +20,7 @@
             </span>
         </div>
     {% endif %}
+    <div class="table-responsive">
     <table class="table table-striped" id="myTable">
         <tr>
             <th>ID</th>
@@ -30,7 +31,7 @@
             <th>Episode Title</th>
             <th>Episode Number</th>
         </tr>
-        {%  for i in object_list %}
+        {%  for i in assets %}
             <tr>
                 <td>{{i.id}}</td>
                 <td><a href="/repo/{{ i.id}}">{{i.material_id}}</a></td>
@@ -42,6 +43,7 @@
             </tr>
         {% endfor %}
     </table>
+    </div>
     {% if is_paginated %}
         <div class="pagination">
             <span class="page-links">
