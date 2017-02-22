@@ -30,4 +30,3 @@ class UserFormView(View):
 
                     login(request, user)
                     return redirect('index')
-

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Media Hub</title>
+    {% load staticfiles %}
+    <link rel="icon" href="{% static 'website/favicon/favicon.ico' %}" sizes="16x16 32x32 48x48 64x64" type="image/vnd.microsoft.icon"/>
+	<link rel="stylesheet" href="{% static 'website/css/bootstrap.min.css' %}" type = "text/css"/>
+	<link rel="stylesheet" href="{% static 'website/jquery/jquery-ui-1.12.1.custom/jquery-ui.min.css' %}" type = "text/css"/>
+    <script src="{% static 'website/jquery/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'website/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'website/jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
+    <style type="text/css">
+		html,
+		body {
+		  height:100%
+		}
+        .helptext{
+            visibility: hidden;
+        }
+	</style>
+</head>
+<body class="body" style="background-color: #9d9d9d">
+    <div class="container-fluid" style="min-height:95%; ">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

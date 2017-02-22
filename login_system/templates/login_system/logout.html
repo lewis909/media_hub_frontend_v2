@@ -1,8 +1,9 @@
-{% extends "website/header.html" %}
+{% extends "website/login_header.html" %}
 
 {% block content %}
 
     <h1>You are logged out</h1>
-    {{ username }}
+    <p>To log back in please click <a href="{% url 'login' %}">here</a></p>
+
 
 {% endblock %}
