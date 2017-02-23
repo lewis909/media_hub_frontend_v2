@@ -1,0 +1,66 @@
+{% extends 'website/header.html' %}
+{% block content %}
+    <h1>{{ username|capfirst }} Task History</h1>
+    {% if user_task_status %}
+        <ul class="pagination">
+        {% if task_status.has_previous %}
+            <li><a href="?page={{ user_task_status.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+             <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in user_task_status.paginator.page_range %}
+            {% if users.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if task_status.has_next %}
+            <li><a href="?page={{ user_task_status.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+        </ul>
+    {% endif %}
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Task ID</th>
+            <th>Material ID</th>
+            <th>Workflow</th>
+            <th>Job Status</th>
+            <th>User</th>
+        </tr>
+        {%  for i in user_task_status %}
+            <tr>
+                <td>{{i.id|stringformat:"06d"}}</td>
+                <td>{{i.material_id}}</td>
+                <td>{{i.workflow}}</td>
+                <td>{{i.status}}</td>
+                <td>{{i.user}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+    {% if user_task_status %}
+        <ul class="pagination">
+        {% if task_status.has_previous %}
+            <li><a href="?page={{ user_task_status.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+             <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in user_task_status.paginator.page_range %}
+            {% if users.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if user_task_status.has_next %}
+            <li><a href="?page={{ user_task_status.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+        </ul>
+    {% endif %}
+{% endblock %}

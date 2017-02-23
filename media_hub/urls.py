@@ -21,9 +21,11 @@ from login_system.views import UserFormView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^reg/$', UserFormView.as_view(), name='reg'),
-    url(r'^home/', include('website.urls')),
+    url(r'^home/', include('website.urls'), name='home'),
+    url(r'^blog/', include('system_blog.urls'), name='sys_blog'),
     url(r'^$', views.login,  {'template_name': 'login_system/login.html'}, name='login'),
     url(r'^logout/$', views.logout, {'template_name': 'login_system/logout.html'}, name='logout'),
     url(r'^job/', include('submit.urls')),
     url(r'^repo/', include('asset_db.urls')),
+    url(r'^accounts/', include('accounts.urls')),
 ]
