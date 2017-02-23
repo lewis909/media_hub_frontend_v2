@@ -66,7 +66,7 @@ def job(request):
                                 core_xml_target,
                                 task_id,
                                 asset_check[0].get('material_id'),
-                                asset_check[0].get('series_id'),
+                                asset_check[0].get('series_title'),
                                 asset_check[0].get('season_title'),
                                 asset_check[0].get('season_number'),
                                 asset_check[0].get('episode_title'),
