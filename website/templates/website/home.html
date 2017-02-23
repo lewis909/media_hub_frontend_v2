@@ -1,7 +1,36 @@
 {% extends "website/header.html" %}
 {% block content %}
-    <h1>System Announcement</h1>
-    <p>place holder</p>
+    <div class="jumbotron">
+    <h1>System Announcements</h1>
+    <hr/>
+    {% for i in blog %}
+        <article>
+            <h2><a href="/blog/#{{ i.pk }}">{{ i.post_date }} | {{ i.title }}</a></h2>
+            <h3>{{ i.body|safe|linebreaks|truncatechars:150}}</h3>
+        </article>
+        <hr/>
+    {% endfor %}
+
+    </div>
     <h1>Most Recent jobs</h1>
-    <p>place holder 2 {{ user }}</p>
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Task ID</th>
+            <th>Material ID</th>
+            <th>Workflow</th>
+            <th>Job Status</th>
+            <th>User</th>
+        </tr>
+        {%  for i in task_list %}
+            <tr>
+                <td>{{i.id|stringformat:"06d"}}</td>
+                <td>{{i.material_id}}</td>
+                <td>{{i.workflow}}</td>
+                <td>{{i.status}}</td>
+                <td>{{i.user}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
 {% endblock %}

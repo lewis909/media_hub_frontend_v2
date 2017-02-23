@@ -15,7 +15,14 @@
 		html,
 		body {
 		  height:100%
-		}
+
+
+		}.anchor {
+            display: block;
+            height: 50px; /*same height as header*/
+            margin-top: -50px; /*same height as header*/
+            visibility: hidden;
+        }
         footer {
     background-color: #1e1e1e;
     color: #f5f5f5;
@@ -44,7 +51,7 @@
 	</style>
 </head>
 <body class="body" style="background-color: #9d9d9d">
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -61,18 +68,18 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-hdd"></span> File Repo<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/repo/">Asset Metadata</a></li>
-            <li><a href="/repo/task">Files</a></li>
+            <li><a href="/repo/file_list">File Repository</a></li>
           </ul>
         </li>
+        <li><a href="/blog/"><span class="glyphicon glyphicon-info-sign"></span> System Blog</a></li>
         <li><a href="/repo/task"><span class="glyphicon glyphicon-stats"></span> Task Status</a></li>
-          <li><a href="/job/"><span class="glyphicon glyphicon-send"></span> Submit Job</a></li>
+        <li><a href="/job/"><span class="glyphicon glyphicon-send"></span> Submit Job</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {{ user }}<span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {{ user|capfirst }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">user account</a></li>
-            <li><a href="#">jobs</a></li>
+            <li><a href="/accounts/">Task History</a></li>
           </ul>
         </li>
         <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
@@ -80,7 +87,8 @@
     </div>
   </div>
 </nav>
-    <div class="container-fluid" style="min-height:95%; ">
+    <div class="container" style="min-height:95%; margin-top:50px ">
+    <span class="anchor" id="top"></span>
         {% block content %}
         {% endblock %}
     </div>
@@ -88,7 +96,7 @@
         <a class="up-arrow" href="#top" data-toggle="tooltip" title="TO TOP">
         <span class="glyphicon glyphicon-chevron-up"></span>
         </a><br><br>
-        <p><a href="/blog/" data-toggle="tooltip" >Back to the top</a></p>
+        <p><a href="/home/" data-toggle="tooltip" >Media Hub</a></p>
     </footer>
 </body>
 </html>

@@ -22,6 +22,7 @@ def job(request):
                 insert.material_id = str(mat_id_post)
                 insert.workflow = str(request.POST['workflow'])
                 insert.status = 'Submitted'
+                insert.user = str(request.user.username)
                 insert.job_start_time = timestamp()
                 insert.save()
                 task_id = "%06d" % insert.id

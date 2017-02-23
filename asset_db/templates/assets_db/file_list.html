@@ -1,0 +1,97 @@
+{% extends 'website/header.html' %}
+{% block content %}
+    <h1>File Repository</h1>
+
+    <p><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Material ID ..." title="Type in a Material ID"></p>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+
+                    <a href="/repo?page={{ page_obj.previous_page_number }}">previous</a>
+
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/repo?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    <div class="table-responsive">
+    <table class="table table-striped" id="myTable">
+        <tr>
+            <th>File name</th>
+            <th>Definition</th>
+            <th>Aspect Ratio</th>
+            <th>Number of <br> Segments</th>
+            <th>Seg 1 Start</th>
+            <th>Seg 1 Duration</th>
+            <th>Seg 2 Start</th>
+            <th>Seg 2 Duration</th>
+            <th>Seg 3 Start</th>
+            <th>Seg 3 Duration</th>
+            <th>Seg 4 Start</th>
+            <th>Seg 4 Duration</th>
+        </tr>
+        {%  for i in file_list %}
+            <tr>
+                <td>{{i.filename}}</td>
+                <td>{{i.definition}}</td>
+                <td>{{i.aspect_ratio}}</td>
+                <td>{{i.number_of_segments}}</td>
+                <td>{{i.seg_1_in}}</td>
+                <td>{{i.seg_1_dur}}</td>
+                <td>{{i.seg_2_in}}</td>
+                <td>{{i.seg_2_dur}}</td>
+                <td>{{i.seg_3_in}}</td>
+                <td>{{i.seg_3_dur}}</td>
+                <td>{{i.seg_4_in}}</td>
+                <td>{{i.seg_4_dur}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+
+                    <a href="/repo?page={{ page_obj.previous_page_number }}">previous</a>
+
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/repo?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    <script>
+        function myFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+    </script>
+
+{% endblock %}
