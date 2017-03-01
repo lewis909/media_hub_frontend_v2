@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^job/', include('submit.urls')),
     url(r'^repo/', include('asset_db.urls')),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^metrics/', include('metrics.urls')),
 ]

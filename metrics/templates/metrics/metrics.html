@@ -1,0 +1,12 @@
+{% extends 'website/header.html' %}
+{% block content %}
+
+    <h1>metrics</h1>
+    <p>Submitted = {{ submitted }},
+        Conforming = {{ conforming }}
+        Transcoding = {{ transcoding }}
+        Complete = {{ complete }}
+        Error = {{ error }}
+    </p>
+
+{% endblock %}

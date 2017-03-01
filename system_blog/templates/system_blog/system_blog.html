@@ -1,0 +1,14 @@
+{% extends "website/header.html" %}
+{% block content %}
+    <h1>Blog</h1>
+    {% for i in blog %}
+        <article>
+        <hr style="color: black">
+        <span class="anchor" id="{{ i.pk }}"></span>
+            <h2>{{ i.title }}</h2>
+            <h4>{{ i.post_date }}</h4>
+            {{ i.body|safe|linebreaks }}
+        </hr>
+        </article>
+    {% endfor %}
+{% endblock %}

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'login_system',
     'system_blog',
     'accounts',
+    'metrics',
 ]
 
 MIDDLEWARE = [
