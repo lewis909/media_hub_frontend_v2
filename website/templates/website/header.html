@@ -67,19 +67,25 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-hdd"></span> File Repo<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/repo/">Asset Metadata</a></li>
-            <li><a href="/repo/file_list">File Repository</a></li>
+            <li><a href="/repo/"><span class="glyphicon glyphicon-list-alt"></span> Asset Metadata</a></li>
+            <li><a href="/repo/file_list"><span class="glyphicon glyphicon-hdd"></span> File Repository</a></li>
           </ul>
         </li>
-        <li><a href="/blog/"><span class="glyphicon glyphicon-info-sign"></span> System Blog</a></li>
-        <li><a href="/repo/task"><span class="glyphicon glyphicon-stats"></span> Task Status</a></li>
-        <li><a href="/job/"><span class="glyphicon glyphicon-send"></span> Submit Job</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-info-sign"></span> Task Info<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="/repo/task"><span class="glyphicon glyphicon-tasks"></span> Task Status</a></li>
+              <li><a href="/metrics/"><span class="glyphicon glyphicon-stats"></span> Metrics</a></li>
+              <li><a href="/blog/"><span class="glyphicon glyphicon-bullhorn"></span> System Blog</a></li>
+          </ul>
+        </li>
+          <li><a href="/job/"><span class="glyphicon glyphicon-send"></span> Submit Job</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {{ user|capfirst }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/accounts/">Task History</a></li>
+            <li><a href="/accounts/"><span class="glyphicon glyphicon-list"></span> Task History</a></li>
           </ul>
         </li>
         <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
