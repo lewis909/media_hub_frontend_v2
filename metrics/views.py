@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from asset_db.models import Task
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='login')
 def task_metrics(request):
     submitted = Task.objects.filter(status='Submitted').all()
     conforming = Task.objects.filter(status='Conforming').all()
