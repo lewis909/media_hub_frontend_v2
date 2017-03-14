@@ -3,23 +3,27 @@
     {% load staticfiles %}
 
     <h1>{{ object.material_id }}</h1>
-    <p><video width="400" controls>
-    <source src="{% static 'website/proxies/' %}{{ object.material_id }}.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
-    </video></p>
-    <label>Series Title</label>
-    <p>{{ object.series_title }}</p>
-    <label>Season Title</label>
-    <p>{{ object.season_title }}</p>
-    <label>Season Number</label>
-    <p>{{ object.season_number }}</p>
-    <label>Episode Title</label>
-    <p>{{ object.Episode_title }}</p>
-    <label>Episode Number</label>
-    <p>{{ object.episode_number }}</p>
-    <label>Ratings</label>
-    <p>{{ object.ratings }}</p>
-    <label>Synopsis</label>
-    <p>{{ object.synopsis }}</p>
+    <div class="embed-responsive embed-responsive-16by9">
+        <video width="400" controls>
+        <source src="{% static 'website/proxies/' %}{{ object.material_id }}.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+        </video><br/>
+    </div>
+    <div>
+        <h3>Series Title</h3>
+        <p>{{ object.series_title }}</p>
+        <h3>Season Title</h3>
+        <p>{{ object.season_title }}</p>
+        <h3>Season Number</h3>
+        <p>{{ object.season_number }}</p>
+        <h3>Episode Title</h3>
+        <p>{{ object.Episode_title }}</p>
+        <h3>Episode Number</h3>
+        <p>{{ object.episode_number }}</p>
+        <h3>Ratings</h3>
+        <p>{{ object.ratings }}</p>
+        <h3>Synopsis</h3>
+        <p>{{ object.synopsis }}</p>
+    </div>
 
 {% endblock %}

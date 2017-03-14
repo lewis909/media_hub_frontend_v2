@@ -1,9 +1,12 @@
 {% extends 'website/header.html' %}
 {% block content %}
     <script>
-        setTimeout(function(){
-            window.location.reload(true);
-        }, 5000);
+    // This function loads '/results/update' every second which provides the results from the database.
+        setInterval(function () {
+
+            $("#task").load("/accounts/update/");
+
+        }, 1000);
     </script>
     <h1>Task Status</h1>
     {% if task_status %}
@@ -27,7 +30,7 @@
         {% endif %}
         </ul>
     {% endif %}
-    <div class="table-responsive">
+    <div id="task" class="table-responsive">
     <table class="table table-striped">
         <tr>
             <th>Task ID</th>

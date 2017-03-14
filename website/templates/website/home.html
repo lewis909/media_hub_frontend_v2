@@ -12,8 +12,16 @@
     {% endfor %}
 
     </div>
-    <h1>Most Recent jobs</h1>
-    <div class="table-responsive">
+    <h1><a href="/repo/task/" title="To Task Status"><span class="glyphicon glyphicon-tasks"></span></a> Most Recent jobs</h1>
+    <script>
+    // This function loads '/results/update' every second which provides the results from the database.
+        setInterval(function () {
+
+            $("#task").load("/home/update/");
+
+        }, 1000);
+    </script>
+    <div id="task" class="table-responsive">
     <table class="table table-striped">
         <tr>
             <th>Task ID</th>

@@ -22,7 +22,15 @@
         {% endif %}
         </ul>
     {% endif %}
-    <div class="table-responsive">
+    <script>
+    // This function loads '/results/update' every second which provides the results from the database.
+        setInterval(function () {
+
+            $("#task").load("/accounts/update/");
+
+        }, 1000);
+    </script>
+    <div id="task" class="table-responsive">
     <table class="table table-striped">
         <tr>
             <th>Task ID</th>

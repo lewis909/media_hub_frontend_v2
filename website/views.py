@@ -11,3 +11,9 @@ def index(request):
     return render(request, 'website/home.html', {'user': request.user.username,
                                                  'blog': blog_v,
                                                  'task_list': task_list})
+
+
+@login_required(login_url='login')
+def index_update(request):
+    task_list = Task.objects.order_by('-id')[:20].all()
+    return render(request, 'website/home_update.html', {'user': request.user.username, 'task_list': task_list})
