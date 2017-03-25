@@ -37,31 +37,27 @@ def task_status(request):
 
     task_list = Task.objects.order_by('-id').all()
     page = request.GET.get('page', 1)
-    paginator = Paginator(task_list, 50)
+    paginator = Paginator(task_list, 30)
+
+    submitted = Task.objects.filter(status='Submitted').all()
+    conforming = Task.objects.filter(status='Conforming').all()
+    transcoding = Task.objects.filter(status='Transcoding').all()
+    complete = Task.objects.filter(status='Complete').all()
+    error = Task.objects.filter(status='Error').all()
+    context = {'submitted': len(list(submitted)),
+               'conforming': len(list(conforming)),
+               'transcoding': len(list(transcoding)),
+               'complete': len(list(complete)),
+               'error': len(list(error))}
 
     try:
-        task = paginator.page(page)
+        context['task_status'] = paginator.page(page)
+        print(context)
     except PageNotAnInteger:
-        task = paginator.page(1)
+        context['task_status'] = paginator.page(1)
     except EmptyPage:
-        task = paginator.page(paginator.num_pages)
-    return render(request, 'assets_db/task.html', {'task_status': task})
-
-
-@login_required(login_url='login')
-def task_status_update(request):
-
-    task_list = Task.objects.order_by('-id').all()
-    page = request.GET.get('page', 1)
-    paginator = Paginator(task_list, 50)
-
-    try:
-        task = paginator.page(page)
-    except PageNotAnInteger:
-        task = paginator.page(1)
-    except EmptyPage:
-        task = paginator.page(paginator.num_pages)
-    return render(request, 'assets_db/task_update.html', {'task_status': task})
+        context['task_status'] = paginator.page(paginator.num_pages)
+    return render(request, 'assets_db/task.html', context)
 
 
 @login_required(login_url='login')

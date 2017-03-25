@@ -1,14 +1,90 @@
 {% extends 'website/header.html' %}
 {% block content %}
-    <script>
-    // This function loads '/results/update' every second which provides the results from the database.
-        setInterval(function () {
-
-            $("#task").load("/accounts/update/");
-
-        }, 1000);
-    </script>
     <h1>Task Status</h1>
+    <div style="background-color: lightgray; border-radius: 5px; padding: 10px; border: 2px whitesmoke solid;">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+        <div class="row" style="max-width: 100%; max-height: 100%;">
+            <div class="col-lg-4">
+                <div class="center-block" style="width: 100%; text-align: center">
+                    <canvas id="myChart" style=" display: inline;background-color: transparent; max-width: 250px; max-height: 250px; margin-left: 18px;"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-3" style="padding: 10px">
+                <div class="center-block">
+                    <table class="table table-striped" style="border: 2px solid dimgrey; margin-left: 15px" ;>
+                        <tr>
+                            <th>State</th>
+                            <th># Of Jobs</th>
+                        </tr>
+                        <tr>
+                            <td>Submitted</td>
+                            <td>{{ submitted }}</td>
+                        </tr>
+                        <tr>
+                            <td>Conforming</td>
+                            <td>{{ conforming }}</td>
+                        </tr>
+                        <tr>
+                            <td>Transcoding</td>
+                            <td>{{ transcoding }}</td>
+                        </tr>
+                        <tr>
+                            <td>Complete</td>
+                            <td>{{ complete }}</td>
+                        </tr>
+                        <tr>
+                            <td>Error</td>
+                            <td>{{ error }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <script>
+                // Chart.JS Code for creating a bar chart
+                var ctx = document.getElementById("myChart");
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Submitted','Conforming','Transcoding','Complete','Error'],
+                        datasets: [{
+                            label: 'Task Status',
+                            data: [{{ submitted }},{{ conforming }},{{ transcoding }},{{ complete }},{{ error }}],
+                            backgroundColor: [
+                                'rgba(20, 246, 250, 0.5)',
+                                'rgba(245, 248, 16, 0.5)',
+                                'rgba(91, 132, 245, 0.5)',
+                                'rgba(63, 191, 93, 0.5)',
+                                'rgba(230, 30, 33, 0.5)',
+                            ],
+                            borderColor: [
+                                'rgba(20, 246, 250, 0.5)',
+                                'rgba(245, 248, 16, 0.5)',
+                                'rgba(91, 132, 245, 0.5)',
+                                'rgba(63, 191, 93, 0.5)',
+                                'rgba(230, 30, 33, 0.5)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        animation:false,
+                        maintainAspectRatio: true,
+                        /*scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        },*/
+                        legend: {
+                            display: false,
+                        },
+                    }
+                });
+            </script>
+        </div>
+    </div>
     {% if task_status %}
         <ul class="pagination">
         {% if task_status.has_previous %}
