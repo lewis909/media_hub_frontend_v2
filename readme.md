@@ -11,7 +11,7 @@ This is all controlled by a web based GUI which allows users to easily trigger j
 
 ## Installation
 
-## Configuration
+## Intro
 
 ![media_hub.png](https://bitbucket.org/repo/q57yRX/images/4222997962-media_hub.png)
 
