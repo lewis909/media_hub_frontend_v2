@@ -13,7 +13,7 @@ This is all controlled by a web based GUI which allows users to easily trigger j
 
 ## Configuration
 
-[<img src="https://docs.google.com/drawings/d/1iO7tqt3UhkCDQRh9ecgFaQ4ZYWUPpyQWQwbXe_V5cJo/pub?w=960&amp;h=600">](Link URL)
+![media_hub.png](https://bitbucket.org/repo/q57yRX/images/4222997962-media_hub.png)
 
 This diagram depicts the basic single transcode server set up.
 
