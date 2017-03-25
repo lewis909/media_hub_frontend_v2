@@ -1,13 +1,13 @@
 {% extends 'website/header.html' %}
 {% block content %}
-    <h1>Metrics</h1>
+    <h1><span class="glyphicon glyphicon-stats"></span> Metrics</h1>
     <script>
     // This function loads '/results/update' every second which provides the results from the database.
         setInterval(function () {
 
             $("#test").load("/metrics/update");
 
-        }, 1000);
+        }, 60000);
     </script>
     <div id="test">
     <p style="font-weight: bold">Submitted = {{ submitted }},
@@ -17,9 +17,9 @@
         Error = {{ error }}
     </p>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
-        <div class="row" style="max-width: 100%; max-height: 100%;">
+        <div class="row">
             <div>
-                <canvas id="myChart" style="background-color: whitesmoke; padding: 10px"></canvas>
+                <canvas id="myChart" style="background-color: whitesmoke; padding: 10px;max-width: 100%; max-height: 100%;"></canvas>
             </div>
             <script>
                 // Chart.JS Code for creating a bar chart
@@ -31,19 +31,19 @@
                         datasets: [{
                             label: 'Task Status',
                             data: [{{ submitted }},{{ conforming }},{{ transcoding }},{{ complete }},{{ error }}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
+                             backgroundColor: [
+                                'rgba(20, 246, 250, 0.5)',
+                                'rgba(245, 248, 16, 0.5)',
+                                'rgba(91, 132, 245, 0.5)',
+                                'rgba(63, 191, 93, 0.5)',
+                                'rgba(230, 30, 33, 0.5)',
                             ],
                             borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
+                                'rgba(20, 246, 250, 0.5)',
+                                'rgba(245, 248, 16, 0.5)',
+                                'rgba(91, 132, 245, 0.5)',
+                                'rgba(63, 191, 93, 0.5)',
+                                'rgba(230, 30, 33, 0.5)',
                             ],
                             borderWidth: 1
                         }]
