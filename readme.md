@@ -11,9 +11,9 @@ This is all controlled by a web based GUI which allows users to easily trigger j
 
 ## Installation
 
-## Configuration
+## Intro
 
-<img src="https://docs.google.com/drawings/d/1iO7tqt3UhkCDQRh9ecgFaQ4ZYWUPpyQWQwbXe_V5cJo/pub?w=960&amp;h=600">
+![media_hub.png](https://bitbucket.org/repo/q57yRX/images/4222997962-media_hub.png)
 
 This diagram depicts the basic single transcode server set up.
 
@@ -37,10 +37,3 @@ The core of this configuration consists of the following servers:
 3. Each Transcode_controller.py shell script monitors a DIR and waits for an XML and Video file that share the same name. Once this condition is met transcode_engine.py is invoked and the core transcoding process begins.
 
 4. For this example we are using FFMPEG to do our transcoding. This consists of 2 stages conform and the final transcode to the clients video spec. This process also creates the required metadata, creates the delivery package and places that package in a DIR for QC or delivery.
-
-
-
-
-
-
-
