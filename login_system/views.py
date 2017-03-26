@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import UserForm
 
 
 class UserFormView(View):
+    """ UserFormView creates a view to allow users to register"""
     form_class = UserForm
     sign_up = 'login_system/sign_up.html'
 
