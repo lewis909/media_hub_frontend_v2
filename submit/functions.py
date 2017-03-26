@@ -37,6 +37,10 @@ def create_core_xml(filename,
                     image_naming_convention,
                     package_naming_convention):
 
+    """
+        create_core_xml takes args from from views.py, this data consists of form POST data and data pulled from the DB.
+    """
+
     core_xml_base = os.path.splitext(os.path.basename(filename))[0]
     manifest = ET.Element('manifest')
     manifest.set('task_id', str(task_id))
