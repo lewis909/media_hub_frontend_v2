@@ -13,7 +13,7 @@ This is all controlled by a web based GUI which allows users to easily trigger j
 
 ## Intro
 
-https://camo.githubusercontent.com/32f8a9673dea35fcc0df4c16e00f9207b51a482d/68747470733a2f2f646f63732e676f6f676c652e636f6d2f64726177696e67732f642f31694f377471743355686b434451526839656367466151345a595755507079515751776258655f5635634a6f2f7075623f773d39363026683d363030
+<img src="https://docs.google.com/drawings/d/1iO7tqt3UhkCDQRh9ecgFaQ4ZYWUPpyQWQwbXe_V5cJo/pub?w=960&amp;h=600">
 
 This diagram depicts the basic single transcode server set up.
 
