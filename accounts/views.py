@@ -4,8 +4,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='login')
 def user_task(request):
-
+    """ Renders data from teh task status DB and filters it by Username"""
     user_task_status = Task.objects.filter(user=request.user.username).all().order_by('-id')
     page = request.GET.get('page', 1)
     paginator = Paginator(user_task_status, 50)
@@ -19,7 +20,9 @@ def user_task(request):
                                                               'username': request.user.username})
 
 
+@login_required(login_url='login')
 def user_task_update(request):
+    """ Provides the data Jquery .load() uses to update the user_task page."""
 
     user_task_status = Task.objects.filter(user=request.user.username).all().order_by('-id')
     page = request.GET.get('page', 1)
