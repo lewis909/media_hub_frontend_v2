@@ -7,6 +7,11 @@ from .forms import SubmitJob
 
 @login_required(login_url='login')
 def job(request):
+    """
+        The job function renders the submit job page and handles the form POST methods generated on submit.
+        It makes sure the form being submitted is valid, if this is true it will pass the relevant data to the
+        create_core_xml function which creates the xml file which is used to drive the transcoders back end.
+    """
     filerepo = FileRepo.objects.values_list('filename', flat=True)
     asset_mat_id = AssetMetadata.objects.all()
 
